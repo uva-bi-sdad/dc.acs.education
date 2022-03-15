@@ -1,0 +1,33 @@
+{
+  "name": "dc.acs.education",
+  "data": [
+    {
+      "name": "post_hs_education",
+      "variables": ["perc_post_hs_edu", "num_post_hs_edu"],
+      "file": "va_hdcttr_acs_2015_2019_post_hs_education.csv.xz",
+      "size": 40804,
+      "md5": "a60503290e9bfe9735c013b1710b408d"
+    }
+  ],
+  "distributions": {
+    "dataverse": {
+      "id": 55051,
+      "doi": "doi:10.18130/V3/AQFFN3",
+      "server": "https://dataverse.lib.virginia.edu/",
+      "data": [
+        {
+          "file": "ncr_cttr_acs_2010_2019_post_hs_education.csv.xz",
+          "id": 55936,
+          "size": 177048,
+          "md5": "2989d40b2da7e5d71b23daf7164762d7"
+        },
+        {
+          "file": "va_hdcttr_acs_2010_2019_post_hs_education.csv.xz",
+          "id": 55937,
+          "size": 312480,
+          "md5": "9478c39e2690151254fbf87955039523"
+        }
+      ]
+    }
+  }
+}
