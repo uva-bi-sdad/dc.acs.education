@@ -81,7 +81,7 @@ for (i in 2015:2019)
     st_drop_geometry()
   
   # health districts
-  con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+  con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
   health_district_counties <- st_read(con, query = "SELECT * FROM dc_common.va_hdct_sdad_2021_health_district_counties")
   dbDisconnect(con)
   
@@ -146,7 +146,7 @@ for (i in 2015:2019)
 }
 
 source("~/git/VDH/src/helper_functions.R")
-con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 dc_dbWriteTable(con, "dc_education_training", "va_tr_acs_2015_2019_post_hs_education", va.tr.post_edu.2)
 dc_dbWriteTable(con, "dc_education_training", "va_ct_acs_2015_2019_post_hs_education", va.ct.post_edu.2)
 dc_dbWriteTable(con, "dc_education_training", "va_hd_acs_2015_2019_post_hs_education", va.hd.post_edu.2)
@@ -189,7 +189,7 @@ dbDisconnect(con)
 
 ```{r}
 # source("~/git/VDH/src/helper_functions.R")
-# con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+# con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 # dc_dbWriteTable(con, "dc_education_training", "va_tr_sdad_2021_post_hs_education", va.tr.post_edu.2)
 # dc_dbWriteTable(con, "dc_education_training", "va_ct_sdad_2021_post_hs_education", va.ct.post_edu.2)
 # dc_dbWriteTable(con, "dc_education_training", "va_hd_sdad_2021_post_hs_education", va.hd.post_edu.2)
@@ -224,7 +224,7 @@ datasets[[i]] <- datasets[[i]] %>%
 }
 
 source("~/git/VDH/src/helper_functions.R")
-con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 # county
 dc_dbWriteTable(con, "dc_education_training", "va_tr_nces_2019_trade_schools_access_scores", datasets[[1]])
 dc_dbWriteTable(con, "dc_education_training", "va_tr_nces_2019_2year_colleges_access_scores", datasets[[2]])
@@ -254,7 +254,7 @@ four_year_colleges
 
 
 ```{r}
-con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 health_district_geoids <- st_read(con, query = "SELECT * FROM dc_common.va_hd_sdad_2021_virginia_health_district_geoids")
 dbDisconnect(con)
 trade_hd_supply <- merge(trade_schools, health_district[, c("county_id", "health_district")], by.x = "geoid", by.y = "county_id")
@@ -559,7 +559,7 @@ four_year_access_df = A.norm_access_df
 ```{r}
 py$trade_school_access_df$region_name <- rownames(py$trade_school_access_df)
 
-con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 health_district_geoids <- st_read(con, query = "SELECT * FROM dc_common.va_hd_sdad_2021_virginia_health_district_geoids")
 dbDisconnect(con)
 
@@ -593,7 +593,7 @@ trade.supply <- trade.supply %>%
 ```{r}
 py$two_year_access_df$region_name <- rownames(py$two_year_access_df)
 
-con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 health_district_geoids <- st_read(con, query = "SELECT * FROM dc_common.va_hd_sdad_2021_virginia_health_district_geoids")
 dbDisconnect(con)
 
@@ -627,7 +627,7 @@ twoyear_data.supply <- twoyear_data.supply %>%
 ```{r}
 py$four_year_access_df$region_name <- rownames(py$four_year_access_df)
 
-con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 health_district_geoids <- st_read(con, query = "SELECT * FROM dc_common.va_hd_sdad_2021_virginia_health_district_geoids")
 dbDisconnect(con)
 
@@ -660,7 +660,7 @@ fouryear_data.supply <- fouryear_data.supply %>%
 
 ```{r}
 source("~/git/VDH/src/helper_functions.R")
-con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 
 # health district
 dc_dbWriteTable(con, "dc_education_training", "va_hd_nces_2019_trade_schools_access_scores", trade.supply)
@@ -760,7 +760,7 @@ fouryear_hd_times <- rbind(fouryear_hd_times.5, fouryear_hd_times.10)
 
 #### FNISH PUTTING DRIVE TIMES IN THE DATABSE!!!
 # source("~/git/VDH/src/helper_functions.R")
-# con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+# con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 # dc_dbWriteTable(con, "dc_education_training", "va_hd_osrm_2021_drive_times_nearest_trade_schools", trade_hd_times)
 # dc_dbWriteTable(con, "dc_education_training", "va_hd_osrm_2021_drive_times_nearest_2year_colleges", twoyear_hd_times)
 # dc_dbWriteTable(con, "dc_education_training", "va_hd_osrm_2021_drive_times_nearest_4year_colleges", fouryear_hd_times)
@@ -1034,7 +1034,7 @@ fouryear_co_times.10 <- four_year_co_times %>%
 fouryear_co_times <- rbind(fouryear_co_times.5, fouryear_co_times.10)
 
 # source("~/git/VDH/src/helper_functions.R")
-# con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+# con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 # dc_dbWriteTable(con, "dc_education_training", "va_ct_osrm_2021_drive_times_nearest_trade_schools", trade_co_times.final)
 # dc_dbWriteTable(con, "dc_education_training", "va_ct_osrm_2021_drive_times_nearest_2year_colleges", twoyear_co_times)
 # dc_dbWriteTable(con, "dc_education_training", "va_ct_osrm_2021_drive_times_nearest_4year_colleges", fouryear_co_times)
@@ -1336,7 +1336,7 @@ fouryear_tr_times.10 <- four_year_tr_times %>%
 fouryear_tr_times <- rbind(fouryear_tr_times.5, fouryear_tr_times.10)
 
 source("~/git/VDH/src/helper_functions.R")
-con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 dc_dbWriteTable(con, "dc_education_training", "va_tr_osrm_2021_drive_times_nearest_trade_schools", trade_tr_times.final)
 dc_dbWriteTable(con, "dc_education_training", "va_tr_osrm_2021_drive_times_nearest_2year_colleges", twoyear_tr_times)
 dc_dbWriteTable(con, "dc_education_training", "va_tr_osrm_2021_drive_times_nearest_4year_colleges", fouryear_tr_times)
@@ -1346,7 +1346,7 @@ dbDisconnect(con)
 
 
 ```{r}
-con <- get_db_conn(db_pass = "rsu8zvrsu8zv")
+con <- get_db_conn(db_pass = Sys.getenv("db_pwd"))
 A <- st_read(con, query = "SELECT * FROM dc_education_training.va_tr_acs_2015_2019_post_hs_education")
 B <- st_read(con, query = "SELECT * FROM dc_education_training.va_tr_sdad_2021_post_hs_education")
 dbDisconnect(con)
